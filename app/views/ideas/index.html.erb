@@ -1,0 +1,35 @@
+<h1>Ideas#index</h1>
+<% if current_user %>
+<h4> Hello <%= current_user.alias %>! </h4>
+<% end %>
+
+
+<%= simple_form_for @new_idea do |f| %>
+<%= f.input :content %>
+<%= f.button :submit %>
+<% end %>
+
+
+
+<table>
+	<% @ideas.each do |idea| %>
+	<tr>	
+		<td> <a href="/users/<%= idea.user.id %>"><%= idea.user.alias %> </a> says :</td>
+		<td colspan=2><%= idea.content %></td>
+		<% if current_user.id == idea.user_id %>
+		<td> <form action='/ideas/delete' method='post'>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input type='hidden' name='_hidden' value='delete'>
+			<input type='hidden' name='idea_id' value='<%= idea.id %>'>
+			<input type='submit' value='delete'>
+		</td>
+		<% end %>
+
+	</tr>
+	<tr>
+		<td> </td>
+		<td> <a href='/like/<%= idea.id %>'>Like</a></td>
+		<td><a href='/bright_ideas/<%= idea.id %>'><%= pluralize(idea.users_liked.count,"Person") %></a> liked this</td>
+	</tr>
+	<% end %>
+</table>

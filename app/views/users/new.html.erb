@@ -1,0 +1,22 @@
+
+<p>Find me in app/views/users/new.html.erb</p>
+
+
+<form action='/login' method='post'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input type='text' name='email' placeholder='email'><br>
+	<input type='password' name='password' placeholder='password'><br>
+	<input type='submit' value='submit'>
+</form>
+
+
+
+
+<%= simple_form_for @user do |f| %>
+<%= f.input :name %>
+<%= f.input :alias %>
+<%= f.input :email %>
+<%= f.input :password %>
+<%= f.input :password_confirmation %>
+<%= f.button :submit %>
+<% end %>

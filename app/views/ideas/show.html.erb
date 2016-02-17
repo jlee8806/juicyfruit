@@ -1,0 +1,29 @@
+<a href="/bright_ideas">RUN COWARD!</a>
+
+<h1>Ideas#show</h1>
+
+<table>
+
+	<tr>	
+		<td> <a href="/users/<%= @idea.user.id %>"><%= @idea.user.alias %> </a> says :</td>
+		<td colspan=2><%= @idea.content %></td>
+
+	</tr>
+	
+</table>
+
+<h2>List of Fools</h2>
+<table border='1'>
+	<tr>
+		<td>Alias</td>
+		<td>Name</td>
+	</tr>
+		<% @likers.each do |user| %>
+	<tr>
+		<td> <a href ='/users/<%= user.user_id %>'> <%= user.alias %></a> </td>
+		<td><%= user.name %></td>
+	</tr>
+	<% end %>
+
+
+</table>
